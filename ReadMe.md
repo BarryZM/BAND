@@ -14,11 +14,11 @@
 
 ![Evj50e.png](https://s2.ax1x.com/2019/05/20/Evj50e.png)
 
-- bert是官方[源码](https://github.com/google-research/bert)
+- src/bert是官方[源码](https://github.com/google-research/bert)
 - data是数据，来自[项目](https://github.com/xmxoxo/BERT-train2deploy)，文本的3分类问题
-- train.sh、classifier.py 训练文件
-- export.sh、export.py导出TF serving的模型
-- client.sh、client.py、file_base_client.py 处理输入数据并向部署的TF serving的模型发出请求，打印输出结果
+- src/train.sh、classifier.py 训练文件
+- src/export.sh、src/export.py导出TF serving的模型
+- src/client.sh、src/client.py、src/file_base_client.py 处理输入数据并向部署的TF serving的模型发出请求，打印输出结果
 
 ### 训练代码
 
