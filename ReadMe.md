@@ -138,6 +138,3 @@ simple_tensorflow_serving --model_base_path="./api"
 
 - [x] 接入Docker
 - [ ] 微信端交互代码
-
-### Buy me a cup of coffe 
-![赞赏](https://s2.ax1x.com/2019/06/29/ZlehAH.th.png)
