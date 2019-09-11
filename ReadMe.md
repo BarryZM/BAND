@@ -126,7 +126,7 @@ simple_tensorflow_serving --model_base_path="./api"
 
 ### Docker 化
 
-原本来的代码结构基本保留在 src 中，docker 镜像的说明参考 [docker_deploy.md]([docker_deploy.md])
+原本来的代码结构基本保留在 src 中，docker 镜像的说明参考 [docker_deploy.md](https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/blob/master/docker_deploy.md)
 
 ### 问题解答
 
