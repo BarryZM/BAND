@@ -141,3 +141,4 @@ simple_tensorflow_serving --model_base_path="./api"
 - [ ] TF Keras版本BERT
 - [ ] 支持NER任务
 - [ ] 支持中文阅读理解任务
+- [ ] C++ 调用模型
