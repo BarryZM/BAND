@@ -138,3 +138,6 @@ simple_tensorflow_serving --model_base_path="./api"
 
 - [x] 接入Docker
 - [ ] 微信端交互代码
+- [ ] TF Keras版本BERT
+- [ ] 支持NER任务
+- [ ] 支持中文阅读理解任务
