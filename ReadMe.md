@@ -1,144 +1,158 @@
-## 简单高效的Bert中文文本分类模型开发和部署
-![ZlmrVg.png](https://s2.ax1x.com/2019/06/29/ZlmrVg.png)
+# BERT-chinese-text-classification-and-deployment
 
-### 准备环境工作
+简单高效的Bert中文文本分类模型开发和部署
 
-- **操作系统**：Linux
+<!-- PROJECT SHIELDS -->
 
-- **TensorFlow Version**：1.13.1，动态图模式
-- **GPU**：我的服务器是Tesla P4 8G GPU，文档后面有显存不足的解决方案
-- **TensorFlow Serving**：[simple-tensorflow-serving](<https://stfs.readthedocs.io/en/latest/quick_start.html>)
-- **依赖库**：requirements.txt
+[![Contributors][contributors-shield]][contributors-url]
+[![Forks][forks-shield]][forks-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
 
-### 目录结构说明
+<!-- PROJECT LOGO -->
+<br />
 
-![Evj50e.png](https://s2.ax1x.com/2019/05/20/Evj50e.png)
+<p align="center">
+  <a href="https://github.com/shaojintian/Best_README_template/">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-- src/bert是官方[源码](https://github.com/google-research/bert)
-- data是数据，来自[项目](https://github.com/xmxoxo/BERT-train2deploy)，文本的3分类问题
-- src/train.sh、classifier.py 训练文件
-- src/export.sh、src/export.py导出TF serving的模型
-- src/client.sh、src/client.py、src/file_base_client.py 处理输入数据并向部署的TF serving的模型发出请求，打印输出结果
+  <h3 align="center">"完美的"README模板</h3>
+  <p align="center">
+    一个"完美的"README模板去快速开始你的项目！
+    <br />
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment"><strong>探索本项目的文档 »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment">查看Demo</a>
+    ·
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues">报告Bug</a>
+    ·
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues">提出新特性</a>
+  </p>
 
-### 训练代码
+</p>
 
-和[项目](https://github.com/xmxoxo/BERT-train2deploy)基本一致，特殊的地方我会指出。
+本篇README.md面向开发者
+ 
+## 目录
 
-1. 写一个自己的文本处理器。有两点需要**注意**：1，改写label 2，把create_examples改成了共有方法，因为我们后面要调用。3，file_base的时候注意跳过第一行，文件数据的第一行是title
+- [上手指南](#上手指南)
+  - [开发前的配置要求](#开发前的配置要求)
+  - [安装步骤](#安装步骤)
+- [文件目录说明](#文件目录说明)
+- [开发的架构](#开发的架构)
+- [部署](#部署)
+- [使用到的框架](#使用到的框架)
+- [贡献者](#贡献者)
+  - [如何参与开源项目](#如何参与开源项目)
+- [版本控制](#版本控制)
+- [作者](#作者)
+- [鸣谢](#鸣谢)
 
-   ```python
-   class MyProcessor(DataProcessor):
-   
-       def get_test_examples(self, data_dir):
-           return self.create_examples(
-               self._read_tsv(os.path.join(data_dir, "test.tsv")), "test")
-   
-       def get_train_examples(self, data_dir):
-           """See base class."""
-           return self.create_examples(
-               self._read_tsv(os.path.join(data_dir, "train.tsv")), "train")
-   
-       def get_dev_examples(self, data_dir):
-           """See base class."""
-           return self.create_examples(
-               self._read_tsv(os.path.join(data_dir, "dev.tsv")), "dev")
-   
-       def get_pred_examples(self, data_dir):
-           return self.create_examples(
-               self._read_tsv(os.path.join(data_dir, "pred.tsv")), "pred")
-   
-       def get_labels(self):
-           """See base class."""
-           return ["-1", "0", "1"]
-   
-       def create_examples(self, lines, set_type, file_base=True):
-           """Creates examples for the training and dev sets. each line is label+\t+text_a+\t+text_b """
-           examples = []
-           for (i, line) in tqdm(enumerate(lines)):
-   
-               if file_base:
-                   if i == 0:
-                       continue
-   
-               guid = "%s-%s" % (set_type, i)
-               text = tokenization.convert_to_unicode(line[1])
-               if set_type == "test" or set_type == "pred":
-                   label = "0"
-               else:
-                   label = tokenization.convert_to_unicode(line[0])
-               examples.append(
-                   InputExample(guid=guid, text_a=text, label=label))
-           return examples
-   
-   ```
+### 上手指南
 
-2. 其他的训练代码，照抄官方的就行
+请将所有链接中的“shaojintian/Best_README_template”改为“your_github_name/your_repository”
 
-3. 可以直接运行train.sh，**注意修改对应的路径**
 
-4. 生成的ckpt文件在output路径下
 
-### 导出模型
+###### 开发前的配置要求
 
-主要代码如下，生成的pb文件在api文件夹下
+1. xxxxx x.x.x
+2. xxxxx x.x.x
 
-```python
-def serving_input_receiver_fn():
-    input_ids = tf.placeholder(dtype=tf.int64, shape=[None, FLAGS.max_seq_length], name='input_ids')
-    input_mask = tf.placeholder(dtype=tf.int64, shape=[None, FLAGS.max_seq_length], name='input_mask')
-    segment_ids = tf.placeholder(dtype=tf.int64, shape=[None, FLAGS.max_seq_length], name='segment_ids')
-    label_ids = tf.placeholder(dtype=tf.int64, shape=[None, ], name='unique_ids')
+###### **安装步骤**
 
-    receive_tensors = {'input_ids': input_ids, 'input_mask': input_mask, 'segment_ids': segment_ids,
-                       'label_ids': label_ids}
-    features = {'input_ids': input_ids, 'input_mask': input_mask, 'segment_ids': segment_ids, "label_ids": label_ids}
-    return tf.estimator.export.ServingInputReceiver(features, receive_tensors)
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
 
-estimator.export_savedmodel(FLAGS.serving_model_save_path, serving_input_receiver_fn)
+```sh
+git clone https://github.com/BERT-chinese-text-classification-and-deployment.git
 ```
 
-### TensorFlow Serving部署
+### 文件目录说明
+eg:
 
-一键部署：
+```
+filetree 
+├── ARCHITECTURE.md
+├── LICENSE.txt
+├── README.md
+├── /account/
+├── /bbs/
+├── /docs/
+│  ├── /rules/
+│  │  ├── backend.txt
+│  │  └── frontend.txt
+├── manage.py
+├── /oa/
+├── /static/
+├── /templates/
+├── useless.md
+└── /util/
 
-```bash
-simple_tensorflow_serving --model_base_path="./api"
 ```
 
-正常启动终端界面：
 
-![EvO7HH.png](https://s2.ax1x.com/2019/05/20/EvO7HH.png)
+### 部署
 
-浏览器访问界面：
+暂无
 
-![EvOouD.png](https://s2.ax1x.com/2019/05/20/EvOouD.png)
+### 使用到的框架
 
-这部分认真阅读simple-tensorflow-serving的[文档](<https://stfs.readthedocs.io/en/latest/quick_start.html>)
+- [TensorFlow](https://getbootstrap.com)
+- [simple-tensorflow-serving](https://stfs.readthedocs.io/en/latest/index.html)
 
-### 本地请求代码
+### 贡献者
 
-分为两种，一种是读取文件的，就是要预测的文本是tsv文件的，叫做file_base_client.py，另一个直接输入文本的是client.py。首先更改input_fn_builder，返回dataset，然后从dataset中取数据，转换为list格式，传入模型，返回结果。
+请阅读**CONTRIBUTING.md** 查阅为该项目做出贡献的开发者。
 
-正常情况下的运行结果：
+#### 如何参与开源项目
 
-![Exkyz4.png](https://s2.ax1x.com/2019/05/20/Exkyz4.png)
+贡献使开源社区成为一个学习、激励和创造的绝佳场所。你所作的任何贡献都是**非常感谢**的。
 
 
-### Docker 化
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-原本来的代码结构基本保留在 src 中，docker 镜像的说明参考 [docker_deploy.md](https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/blob/master/docker_deploy.md)
 
-### 问题解答
 
-- 训练的显存不足怎么办
+### 版本控制
 
-  答：按照官方的建议，调小max_seq_length和train_batch_size
+该项目使用Git进行版本管理。您可以在repository参看当前可用版本。
 
-### TODO LIST
+### 作者
+您可以通过以下方式联系我：
+- **Email**: sunyanhust@163.com
+- **NLP技术QQ交流群**：859886087
 
-- [x] 接入Docker
-- [ ] 微信端交互代码
-- [ ] TF Keras版本BERT
-- [ ] 支持NER任务
-- [ ] 支持中文阅读理解任务
-- [ ] C++ 调用模型
+ > 您也可以在贡献者名单中参看所有参与该项目的开发者。
+
+### 版权说明
+
+该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/blob/master/LICENSE.txt)
+
+### 鸣谢
+
+- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+- [Img Shields](https://shields.io)
+- [Choose an Open Source License](https://choosealicense.com)
+- [GitHub Pages](https://pages.github.com)
+- [Animate.css](https://daneden.github.io/animate.css)
+
+<!-- links -->
+[your-project-path]: SunYanCN/BERT-chinese-text-classification-and-deployment
+[contributors-shield]: https://img.shields.io/github/contributors/SunYanCN/BERT-chinese-text-classification-and-deployment.svg?style=flat-square
+[contributors-url]: https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/SunYanCN/BERT-chinese-text-classification-and-deployment.svg?style=flat-square
+[forks-url]: https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/network/members
+[stars-shield]: https://img.shields.io/github/stars/SunYanCN/BERT-chinese-text-classification-and-deployment.svg?style=flat-square
+[stars-url]: https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/stargazers
+[issues-shield]: https://img.shields.io/github/issues/SunYanCN/BERT-chinese-text-classification-and-deployment.svg?style=flat-square
+[issues-url]: https://img.shields.io/github/issues/SunYanCN/BERT-chinese-text-classification-and-deployment.svg
+[license-shield]: https://img.shields.io/github/license/SunYanCN/BERT-chinese-text-classification-and-deployment.svg?style=flat-square
+[license-url]: https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/blob/master/LICENSE.txt
