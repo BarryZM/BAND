@@ -27,8 +27,7 @@ from band.processors.base_processor import BaseProcessor
 from band.tasks.base_model import BaseModel
 from band.tasks.classification.base_model import BaseClassificationModel
 from band.tasks.labeling.base_model import BaseLabelingModel
-
-custom_objects = tf.keras.utils.get_custom_objects()
+from band import custom_objects
 
 
 def unison_shuffled_copies(a, b):

@@ -16,7 +16,7 @@ from band.tasks.labeling.base_model import BaseLabelingModel
 from band.layers import L
 from band.layers.crf import CRF
 
-from band.utils import custom_objects
+from band import custom_objects
 
 custom_objects['CRF'] = CRF
 

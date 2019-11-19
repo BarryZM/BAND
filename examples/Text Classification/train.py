@@ -26,9 +26,11 @@ test_x, test_y = SMP2018ECDTCorpus.load_data('test')
 
 # BERT model path
 bert_model_path = 'D:/bert/chinese_L-12_H-768_A-12'
+#bert_model_path = '../models/chinese_roberta_wwm_ext_L-12_H-768_A-12'
 bert_embed = BERTEmbedding(bert_model_path,
                            task=band.CLASSIFICATION,
-                           sequence_length=100)
+                           sequence_length=100,
+                           with_pool=False)
 
 model = BiLSTM_Model(bert_embed)
 tf_board_callback = keras.callbacks.TensorBoard(log_dir='./logs', update_freq=1000)

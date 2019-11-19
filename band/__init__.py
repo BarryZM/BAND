@@ -20,6 +20,9 @@ tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 from band import bert4keras
 from band.macros import TaskType, config
 
+from band.bert4keras.layers import get_custom_objects
+custom_objects = get_custom_objects()
+
 CLASSIFICATION = TaskType.CLASSIFICATION
 LABELING = TaskType.LABELING
 

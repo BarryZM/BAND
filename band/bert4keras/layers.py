@@ -5,7 +5,6 @@ import tensorflow as tf
 from band.bert4keras.backend import keras, K
 from band.bert4keras.snippets import get_all_attributes, is_string
 
-
 # 等价于 from keras.layers import *
 locals().update(get_all_attributes(keras.layers))
 initializers = keras.initializers
@@ -41,6 +40,7 @@ def sequence_masking(x, mask, mode=0, axis=None):
 class MultiHeadAttention(Layer):
     """多头注意力机制
     """
+
     def __init__(self,
                  heads,
                  head_size,
@@ -103,7 +103,7 @@ class MultiHeadAttention(Layer):
         kw = K.reshape(kw, (-1, K.shape(k)[1], self.heads, self.key_size))
         vw = K.reshape(vw, (-1, K.shape(v)[1], self.heads, self.head_size))
         # Attention
-        a = tf.einsum('bjhd,bkhd->bhjk', qw, kw) / self.key_size**0.5
+        a = tf.einsum('bjhd,bkhd->bhjk', qw, kw) / self.key_size ** 0.5
         a = sequence_masking(a, v_mask, 1, -1)
         if a_mask is not None:
             if is_string(a_mask) and a_mask == 'history_only':
@@ -137,13 +137,14 @@ class MultiHeadAttention(Layer):
 class LayerNormalization(Layer):
     """实现基本的Layer Norm，只保留核心运算部分
     """
+
     def __init__(self, **kwargs):
         super(LayerNormalization, self).__init__(**kwargs)
         self.epsilon = K.epsilon() * K.epsilon()
 
     def build(self, input_shape):
         super(LayerNormalization, self).build(input_shape)
-        shape = (input_shape[-1], )
+        shape = (input_shape[-1],)
         self.gamma = self.add_weight(shape=shape,
                                      initializer='ones',
                                      name='gamma')
@@ -164,6 +165,7 @@ class LayerNormalization(Layer):
 class PositionEmbedding(Layer):
     """定义位置Embedding，这里的Embedding是可训练的。
     """
+
     def __init__(self,
                  input_dim,
                  output_dim,
@@ -199,7 +201,7 @@ class PositionEmbedding(Layer):
         if self.merge_mode == 'add':
             return input_shape
         else:
-            return input_shape[:2] + (input_shape[2] + self.v_dim, )
+            return input_shape[:2] + (input_shape[2] + self.v_dim,)
 
     def get_config(self):
         config = {
@@ -215,6 +217,7 @@ class PositionEmbedding(Layer):
 class FeedForward(Layer):
     """FeedForward层，其实就是两个Dense层的叠加
     """
+
     def __init__(self,
                  units,
                  activation='relu',
@@ -253,6 +256,7 @@ class EmbeddingDense(Layer):
     """运算跟Dense一致，但kernel用Embedding层的embeddings矩阵。
     根据Embedding层的名字来搜索定位Embedding层。
     """
+
     def __init__(self, embedding_name, activation='softmax', **kwargs):
         super(EmbeddingDense, self).__init__(**kwargs)
         self.embedding_name = embedding_name
@@ -285,7 +289,7 @@ class EmbeddingDense(Layer):
                 self.kernel = K.transpose(embedding_layer.embeddings)
                 self.units = K.int_shape(self.kernel)[1]
                 self.bias = self.add_weight(name='bias',
-                                            shape=(self.units, ),
+                                            shape=(self.units,),
                                             initializer='zeros')
 
         outputs = K.dot(inputs, self.kernel)
@@ -294,7 +298,7 @@ class EmbeddingDense(Layer):
         return outputs
 
     def compute_output_shape(self, input_shape):
-        return input_shape[:-1] + (self.units, )
+        return input_shape[:-1] + (self.units,)
 
     def get_config(self):
         config = {
@@ -312,5 +316,10 @@ custom_objects = {
     'FeedForward': FeedForward,
     'EmbeddingDense': EmbeddingDense
 }
+
+
+def get_custom_objects():
+    return custom_objects
+
 
 keras.utils.get_custom_objects().update(custom_objects)
