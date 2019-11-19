@@ -1,6 +1,6 @@
 # BERT-chinese-text-classification-and-deployment
 
-简单高效的Bert中文文本分类模型开发和部署
+Simple and efficient BERT model development and deployment, 简单高效的 BERT 模型开发和部署
 
 <!-- PROJECT SHIELDS -->
 
