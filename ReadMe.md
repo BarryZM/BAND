@@ -18,20 +18,20 @@ Simple and efficient BERT model development and deployment, 简单高效的 BERT
     <img src="docs/images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">"完美的"README模板</h3>
+  <h3 align="center">BAND</h3>
   <p align="center">
-    一个"完美的"README模板去快速开始你的项目！
+    BAND：BERT Application aNd Deployment
     <br />
-    <a href="https://sunyancn.github.io/BAND/"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://sunyancn.github.io/BERT-chinese-text-classification-and-deployment/"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/SunYanCN/BAND">查看Demo</a>
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment">查看Demo</a>
     ·
-    <a href="https://github.com/SunYanCN/BAND/issues/new?assignees=&labels=&template=bug_report.md&title=">报告Bug</a>
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues/new?assignees=&labels=&template=bug_report.md&title=">报告Bug</a>
     ·
-    <a href="https://github.com/SunYanCN/BAND/issues/new?assignees=&labels=&template=feature_request.md&title=">提出新特性</a>
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues/new?assignees=&labels=&template=feature_request.md&title=">提出新特性</a>
         ·
-    <a href="https://github.com/SunYanCN/BAND/issues/new?assignees=&labels=&template=custom.md&title=">问题交流</a>
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues/new?assignees=&labels=&template=custom.md&title=">问题交流</a>
   </p>
 
 </p>
@@ -70,7 +70,7 @@ Simple and efficient BERT model development and deployment, 简单高效的 BERT
 2. Clone the repo
 
 ```sh
-git clone https://github.com/BAND.git
+git clone https://github.com/BERT-chinese-text-classification-and-deployment.git
 ```
 
 ### 文件目录说明
@@ -134,21 +134,21 @@ filetree
 
 ### 版权说明
 
-该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/SunYanCN/BAND/blob/master/LICENSE.txt)
+该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/blob/master/LICENSE.txt)
 
 ### 鸣谢
 
 - [Free Logo Design](https://www.freelogodesign.org/)
 
 <!-- links -->
-[your-project-path]: SunYanCN/BAND
-[contributors-shield]: https://img.shields.io/github/contributors/SunYanCN/BAND.svg?style=flat-square
-[contributors-url]: https://github.com/SunYanCN/BAND/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/SunYanCN/BAND.svg?style=flat-square
-[forks-url]: https://github.com/SunYanCN/BAND/network/members
-[stars-shield]: https://img.shields.io/github/stars/SunYanCN/BAND.svg?style=flat-square
-[stars-url]: https://github.com/SunYanCN/BAND/stargazers
-[issues-shield]: https://img.shields.io/github/issues/SunYanCN/BAND.svg?style=flat-square
-[issues-url]: https://img.shields.io/github/issues/SunYanCN/BAND.svg
-[license-shield]: https://img.shields.io/github/license/SunYanCN/BAND.svg?style=flat-square
-[license-url]: https://github.com/SunYanCN/BAND/blob/master/LICENSE.txt
+[your-project-path]: SunYanCN/BERT-chinese-text-classification-and-deployment
+[contributors-shield]: https://img.shields.io/github/contributors/SunYanCN/BERT-chinese-text-classification-and-deployment.svg?style=flat-square
+[contributors-url]: https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/SunYanCN/BERT-chinese-text-classification-and-deployment.svg?style=flat-square
+[forks-url]: https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/network/members
+[stars-shield]: https://img.shields.io/github/stars/SunYanCN/BERT-chinese-text-classification-and-deployment.svg?style=flat-square
+[stars-url]: https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/stargazers
+[issues-shield]: https://img.shields.io/github/issues/SunYanCN/BERT-chinese-text-classification-and-deployment.svg?style=flat-square
+[issues-url]: https://img.shields.io/github/issues/SunYanCN/BERT-chinese-text-classification-and-deployment.svg
+[license-shield]: https://img.shields.io/github/license/SunYanCN/BERT-chinese-text-classification-and-deployment.svg?style=flat-square
+[license-url]: https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/blob/master/LICENSE
