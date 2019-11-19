@@ -1,6 +1,6 @@
 # BAND：BERT Application aNd Deployment
 
-Simple and efficient BERT model development and deployment, 简单高效的 BERT 模型开发和部署
+A simple and efficient BERT model training and deployment framework，一个简单高效的 BERT 模型训练和部署框架
 
 <!-- PROJECT SHIELDS -->
 
