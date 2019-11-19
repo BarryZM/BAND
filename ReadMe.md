@@ -14,8 +14,8 @@ Simple and efficient BERT model development and deployment, 简单高效的 BERT
 <br />
 
 <p align="center">
-  <a href="https://github.com/shaojintian/Best_README_template/">
-    <img src="figures/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/sunyancn/bang/">
+    <img src="figures/logo.png" alt="Logo" width="100" height="100">
   </a>
 
   <h3 align="center">BAND</h3>
