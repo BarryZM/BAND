@@ -1,0 +1,49 @@
+site_name: Headliner
+site_author: Axel Springer AI
+
+nav:
+    - Home: index.md
+    - Examples:
+        - Neural Machine Translation: examples/nmt_example.md
+        - Advanced Neural Machine Translation: examples/advanced_nmt_example.md
+        - BERT Machine Translation: examples/bert_example.md
+    - Documentation:
+        - Callbacks:
+            - ValidationCallback: callbacks/validation_callback.md
+            - EvaluationCallback: callbacks/evaluation_callback.md
+            - ModelCheckpointCallback: callbacks/model_checkpoint_callback.md
+        - Evaluation:
+            - BleuScorer: evaluation/bleu_scorer.md
+        - Model:
+            - Summarizer: model/summarizer.md
+            - SummarizerAttention: model/summarizer_attention.md
+            - SummarizerTransformer: model/summarizer_transformer.md
+        - Preprocessing:
+            - BucketGenerator: preprocessing/bucket_generator.md
+            - DatasetGenerator: preprocessing/dataset_generator.md
+            - Preprocessor: preprocessing/preprocessor.md
+            - Vectorizer: preprocessing/vectorizer.md
+            - Tokenizer: preprocessing/tokenizer.md
+        - Trainer: trainer.md
+        - Losses: losses.md
+        - Embeddings: embeddings.md
+    - Contribution: CONTRIBUTING.md
+    - License: LICENSE.md
+
+theme:
+  name: 'material'
+  palette:
+    primary: 'black'
+    accent: 'indigo'
+  logo: 'img/logo.svg'
+  favicon: 'img/favicon.ico'
+
+repo_name: 'as-ideas/headliner'
+repo_url: 'https://github.com/as-ideas/headliner'
+
+google_analytics:
+  - 'UA-137434942-5'
+  - 'auto'
+
+markdown_extensions:
+  - codehilite
