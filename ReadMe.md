@@ -27,9 +27,11 @@
     <br />
     <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment">查看Demo</a>
     ·
-    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues">报告Bug</a>
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues/new?assignees=&labels=&template=bug_report.md&title=">报告Bug</a>
     ·
-    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues">提出新特性</a>
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues/new?assignees=&labels=&template=feature_request.md&title=">提出新特性</a>
+        ·
+    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues/new?assignees=&labels=&template=custom.md&title=">问题交流</a>
   </p>
 
 </p>
@@ -72,8 +74,6 @@ git clone https://github.com/BERT-chinese-text-classification-and-deployment.git
 ```
 
 ### 文件目录说明
-eg:
-
 ```
 filetree 
 ├── ARCHITECTURE.md
@@ -138,11 +138,7 @@ filetree
 
 ### 鸣谢
 
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Img Shields](https://shields.io)
-- [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Pages](https://pages.github.com)
-- [Animate.css](https://daneden.github.io/animate.css)
+- [Free Logo Design](https://www.freelogodesign.org/)
 
 <!-- links -->
 [your-project-path]: SunYanCN/BERT-chinese-text-classification-and-deployment
