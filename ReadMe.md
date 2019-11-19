@@ -125,7 +125,7 @@ filetree
 
 ### 版权说明
 
-该项目签署了MIT 授权许可，详情请参阅 [LICENSE.txt](https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/blob/master/LICENSE.txt)
+该项目签署了MIT 授权许可，详情请参阅 [LICENSE](https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/blob/master/LICENSE)
 
 ### 鸣谢
 
