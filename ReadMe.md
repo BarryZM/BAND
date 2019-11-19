@@ -129,6 +129,7 @@ filetree
 ### 鸣谢
 
 - [Free Logo Design](https://www.freelogodesign.org/)
+- [Headliner](https://github.com/as-ideas/headliner)
 
 <!-- links -->
 [your-project-path]: SunYanCN/BERT-chinese-text-classification-and-deployment
