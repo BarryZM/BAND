@@ -1,4 +1,4 @@
-# Bang Documentation
+# band Documentation
 
 ## Building the documentation
 - Install MkDocs: `pip install mkdocs mkdocs-material`

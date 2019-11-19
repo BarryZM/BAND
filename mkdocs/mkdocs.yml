@@ -1,4 +1,4 @@
-site_name: BANG
+site_name: BAND
 site_author: Axel Springer AI
 
 nav:
@@ -11,7 +11,7 @@ theme:
   palette:
     primary: 'black'
     accent: 'indigo'
-  logo: 'img/logo.svg'
+  logo: 'img/logo.png'
   favicon: 'img/favicon.ico'
 
 repo_name: 'SunYanCN/BAND'

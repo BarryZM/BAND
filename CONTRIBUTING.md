@@ -9,14 +9,14 @@ We welcome any contributions whether it's,
 Please read this guide before making any contributions.
 
 #### Submit Feedback
-The feedback should be submitted by creating an issue at [GitHub issues](https://github.com/sunyancn/bang/issues).
+The feedback should be submitted by creating an issue at [GitHub issues](https://github.com/sunyancn/band/issues).
 Select the related template (bug report, feature request, or custom) and add the corresponding labels.
 
 #### Fix Bugs:
-You may look through the [GitHub issues](https://github.com/sunyancn/bang/issues) for bugs.
+You may look through the [GitHub issues](https://github.com/sunyancn/band/issues) for bugs.
 
 #### Implement Features
-You may look through the [GitHub issues](https://github.com/sunyancn/bang/issues) for feature requests.
+You may look through the [GitHub issues](https://github.com/sunyancn/band/issues) for feature requests.
 
 ## Pull Requests (PR)
 1. Fork the repository and a create a new branch from the master branch.

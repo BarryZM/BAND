@@ -35,7 +35,7 @@ def find_version(*file_paths):
     raise RuntimeError("Unable to find version string.")
 
 
-__name__ = 'pybang'
+__name__ = 'band'
 __author__ = "sunyancn"
 __copyright__ = "Copyright 2019, SunYanCN"
 __credits__ = []
@@ -43,13 +43,13 @@ __license__ = "MIT License"
 __maintainer__ = "SunYanCN"
 __email__ = "sunyanhust@163.com"
 
-__url__ = 'https://github.com/BrikerMan/Kashgari'
+__url__ = 'https://github.com/sunyancn/band'
 __description__ = 'Simple, Keras-powered multilingual NLP framework,' \
                   ' allows you to build your models in 5 minutes for named entity recognition (NER),' \
                   ' part-of-speech tagging (PoS) and text classification tasks. ' \
                   'Includes BERT, GPT-2 and word2vec embedding.'
 
-__version__ = find_version('bang', 'version.py')
+__version__ = find_version('band', 'version.py')
 README = (HERE / "README.md").read_text(encoding='utf-8')
 
 with codecs.open('requirements.txt', 'r', 'utf8') as reader:
