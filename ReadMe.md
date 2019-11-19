@@ -35,8 +35,6 @@ Simple and efficient BERT model development and deployment, 简单高效的 BERT
   </p>
 
 </p>
-
-本篇README.md面向开发者
  
 ## 目录
 
