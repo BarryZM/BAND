@@ -1,17 +1,27 @@
 site_name: BAND
-site_author: Axel Springer AI
+site_author: SunYanCN
 
 nav:
     - Home: index.md
     - Contribution: CONTRIBUTING.md
     - License: LICENSE.md
+    - Documentation:
+        - Callbacks: callbacks.md
+        - Corpus: corpus.md
+        - Utils: utils.md
+        - Embeddings:
+            - bare_embedding: embeddings/bare_embedding.md
+            - base_embedding: embeddings/base_embedding.md
+            - bert_embedding: embeddings/bert_embedding.md
+            - word_embedding: embeddings/word_embedding.md
+
 
 theme:
   name: 'material'
   palette:
     primary: 'black'
     accent: 'indigo'
-  logo: 'img/logo.png'
+  logo: 'img/logo.svg'
   favicon: 'img/favicon.ico'
 
 repo_name: 'SunYanCN/BAND'
