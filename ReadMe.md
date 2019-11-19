@@ -53,22 +53,16 @@ Simple and efficient BERT model development and deployment, 简单高效的 BERT
 
 ### 上手指南
 
-请将所有链接中的“shaojintian/Best_README_template”改为“your_github_name/your_repository”
-
-
-
 ###### 开发前的配置要求
 
 1. xxxxx x.x.x
 2. xxxxx x.x.x
 
 ###### **安装步骤**
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo
 
 ```sh
-git clone https://github.com/BERT-chinese-text-classification-and-deployment.git
+git clone https://github.com/SunYanCN/BAND.git
 ```
 
 ### 文件目录说明
@@ -89,7 +83,6 @@ filetree
 ├── /templates/
 ├── useless.md
 └── /util/
-
 ```
 
 
