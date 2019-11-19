@@ -14,6 +14,15 @@ nav:
             - base_embedding: embeddings/base_embedding.md
             - bert_embedding: embeddings/bert_embedding.md
             - word_embedding: embeddings/word_embedding.md
+        - Tasks:
+            - Classification:
+              - Base_Model: tasks\classification\base_model.md
+              - Dpcnn_Model: tasks\classification\dpcnn_model.md
+              - Models: tasks\classification\models.md
+            - Labeling:
+              - Base_Model: tasks\labeling\base_model.md
+              - Models: tasks\labeling\models.md
+
 
 
 theme:
@@ -21,7 +30,7 @@ theme:
   palette:
     primary: 'black'
     accent: 'indigo'
-  logo: 'img/logo.svg'
+  logo: 'img/logo.png'
   favicon: 'img/favicon.ico'
 
 repo_name: 'SunYanCN/BAND'
