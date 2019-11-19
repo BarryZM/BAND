@@ -17,10 +17,9 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 import tensorflow as tf
 tf.compat.v1.logging.set_verbosity(tf.compat.v1.logging.ERROR)
 
-import keras_bert
+from band import bert4keras
 from band.macros import TaskType, config
 
-custom_objects = keras_bert.get_custom_objects()
 CLASSIFICATION = TaskType.CLASSIFICATION
 LABELING = TaskType.LABELING
 

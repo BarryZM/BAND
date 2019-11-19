@@ -59,10 +59,13 @@ Simple and efficient BERT model development and deployment, 简单高效的 BERT
 2. xxxxx x.x.x
 
 ###### **安装步骤**
-1. Clone the repo
-
+1. install from PyPi
 ```sh
-git clone https://github.com/SunYanCN/BAND.git
+pip install band
+```
+2. Install From Git
+```sh
+pip install git+https://www.github.com/sunyancn/band.git
 ```
 
 ### 文件目录说明
@@ -127,7 +130,8 @@ filetree
 该项目使用Git进行版本管理。您可以在repository参看当前可用版本。
 
 ### 鸣谢
-
+- [Kashgari](https://github.com/BrikerMan/Kashgari)
+- [bert4keras](https://github.com/bojone/bert4keras)
 - [Free Logo Design](https://www.freelogodesign.org/)
 - [Headliner](https://github.com/as-ideas/headliner)
 

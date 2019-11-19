@@ -21,13 +21,14 @@ from typing import List, Optional, Dict, Union
 import tensorflow as tf
 from tensorflow.python import keras, saved_model
 
-from band import custom_objects
 from band.embeddings.base_embedding import Embedding
 from band.layers.crf import CRF
 from band.processors.base_processor import BaseProcessor
 from band.tasks.base_model import BaseModel
 from band.tasks.classification.base_model import BaseClassificationModel
 from band.tasks.labeling.base_model import BaseLabelingModel
+
+custom_objects = tf.keras.utils.get_custom_objects()
 
 
 def unison_shuffled_copies(a, b):
