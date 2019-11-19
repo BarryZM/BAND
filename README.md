@@ -58,15 +58,16 @@ Simple and efficient BERT model development and deployment, 简单高效的 BERT
 1. xxxxx x.x.x
 2. xxxxx x.x.x
 
-###### **安装步骤**
-1. install from PyPi
-```sh
-pip install band
-```
-2. Install From Git
-```sh
-pip install git+https://www.github.com/sunyancn/band.git
-```
+###### **安装方法**
+安装band有两种方式：
+- Install from PyPi
+    ```sh
+    pip install band
+    ```
+- Install From Git
+    ```sh
+    pip install git+https://www.github.com/sunyancn/band.git
+    ```
 
 ### 文件目录说明
 ```
