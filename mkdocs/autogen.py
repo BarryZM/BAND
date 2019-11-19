@@ -197,8 +197,9 @@ def get_func_comments(function_definitions):
 
 
 def get_comments_str(file_name):
-    with open(file_name) as fd:
+    with open(file_name, encoding='utf-8') as fd:
         file_contents = fd.read()
+
     module = ast.parse(file_contents)
 
     function_definitions = [node for node in module.body if isinstance(node, ast.FunctionDef)]

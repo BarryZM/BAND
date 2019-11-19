@@ -1,11 +1,13 @@
 # encoding: utf-8
 
-import os
 import logging
-import pandas as pd
-from band import macros as k
+import os
 from typing import Tuple, List
+
+import pandas as pd
 from tensorflow.python.keras.utils import get_file
+
+from band import macros as k
 from band import utils
 
 CORPUS_PATH = os.path.join(k.DATA_PATH, 'corpus')
@@ -58,10 +60,6 @@ class ChineseDailyNerCorpus(object):
                   shuffle: bool = True) -> Tuple[List[List[str]], List[List[str]]]:
         """
         Load dataset as sequence labeling format, char level tokenized
-
-        features: ``[['海', '钓', '比', '赛', '地', '点', '在', '厦', '门', ...], ...]``
-
-        labels: ``[['O', 'O', 'O', 'O', 'O', 'O', 'O', 'B-LOC', 'I-LOC', ...], ...]``
 
         Sample::
 
@@ -138,14 +136,6 @@ class SMP2018ECDTCorpus(object):
 
     This dataset is released by the Evaluation of Chinese Human-Computer Dialogue Technology (SMP2018-ECDT)
     task 1 and is provided by the iFLYTEK Corporation, which is a Chinese human-computer dialogue dataset.
-    sample::
-
-              label           query
-        0   weather        今天东莞天气如何
-        1       map  从观音桥到重庆市图书馆怎么走
-        2  cookbook          鸭蛋怎么腌？
-        3    health         怎么治疗牛皮癣
-        4      chat             唠什么
     """
 
     __corpus_name__ = 'SMP2018ECDTCorpus'
@@ -158,11 +148,6 @@ class SMP2018ECDTCorpus(object):
                   cutter: str = 'char') -> Tuple[List[List[str]], List[str]]:
         """
         Load dataset as sequence classification format, char level tokenized
-
-        features: ``[['听', '新', '闻', '。'], ['电', '视', '台', '在', '播', '什', '么'], ...]``
-
-        labels: ``['news', 'epg', ...]``
-
         Samples::
             train_x, train_y = SMP2018ECDTCorpus.load_data('train')
             test_x, test_y = SMP2018ECDTCorpus.load_data('test')
