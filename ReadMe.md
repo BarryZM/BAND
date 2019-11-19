@@ -1,4 +1,4 @@
-# BERT-chinese-text-classification-and-deployment
+# BAND：BERT Application aNd Deployment
 
 Simple and efficient BERT model development and deployment, 简单高效的 BERT 模型开发和部署
 
