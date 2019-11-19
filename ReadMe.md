@@ -22,10 +22,10 @@ Simple and efficient BERT model development and deployment, 简单高效的 BERT
   <p align="center">
     BAND：BERT Application aNd Deployment
     <br />
-    <a href="https://sunyancn.github.io/BERT-chinese-text-classification-and-deployment/"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://sunyancn.github.io/BANG/"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment">查看Demo</a>
+    <a href="https://github.com/SunYanCN/BANG/examples">查看Demo</a>
     ·
     <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment/issues/new?assignees=&labels=&template=bug_report.md&title=">报告Bug</a>
     ·
