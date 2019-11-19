@@ -25,7 +25,7 @@ valid_x, valid_y = SMP2018ECDTCorpus.load_data('valid')
 test_x, test_y = SMP2018ECDTCorpus.load_data('test')
 
 # BERT model path
-bert_model_path = ''
+bert_model_path = 'D:/bert/chinese_L-12_H-768_A-12'
 bert_embed = BERTEmbedding(bert_model_path,
                            task=band.CLASSIFICATION,
                            sequence_length=100)
