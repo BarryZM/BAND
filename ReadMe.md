@@ -22,7 +22,7 @@ Simple and efficient BERT model development and deployment, 简单高效的 BERT
   <p align="center">
     一个"完美的"README模板去快速开始你的项目！
     <br />
-    <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment"><strong>探索本项目的文档 »</strong></a>
+    <a href="https://sunyancn.github.io/BERT-chinese-text-classification-and-deployment/"><strong>探索本项目的文档 »</strong></a>
     <br />
     <br />
     <a href="https://github.com/SunYanCN/BERT-chinese-text-classification-and-deployment">查看Demo</a>
