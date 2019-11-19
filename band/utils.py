@@ -137,7 +137,7 @@ def convert_to_saved_model(model: BaseModel,
 
 
 if __name__ == "__main__":
-    path = '/Users/brikerman/Desktop/python/band/tests/classification/saved_models/' \
+    path = '/Users/sunyancn/Desktop/python/band/tests/classification/saved_models/' \
            'band.tasks.classification.models/BiLSTM_Model'
     p = load_processor(path)
     print(p.process_x_dataset([list('语言模型')]))

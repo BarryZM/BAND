@@ -127,7 +127,7 @@ if __name__ == "__main__":
 
     train_x, train_y = train_x[:5120], train_y[:5120]
 
-    model = load_model('/Users/brikerman/Desktop/blstm_model')
+    model = load_model('/Users/sunyancn/Desktop/blstm_model')
     # model.build_model(train_x[:100], train_y[:100])
 
     # model.fit(train_x[:1000], train_y[:1000], epochs=10)

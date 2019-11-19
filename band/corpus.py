@@ -52,7 +52,7 @@ class ChineseDailyNerCorpus(object):
     https://github.com/zjy-ucas/ChineseNER/
     """
     __corpus_name__ = 'china-people-daily-ner-corpus'
-    __zip_file__name = 'http://s3.bmio.net/band/china-people-daily-ner-corpus.tar.gz'
+    __zip_file__name = 'http://s3.bmio.net/kashgari/china-people-daily-ner-corpus.tar.gz'
 
     @classmethod
     def load_data(cls,
@@ -96,7 +96,7 @@ class ChineseDailyNerCorpus(object):
 
 class CONLL2003ENCorpus(object):
     __corpus_name__ = 'conll2003_en'
-    __zip_file__name = 'http://s3.bmio.net/band/conll2003_en.tar.gz'
+    __zip_file__name = 'http://s3.bmio.net/kashgari/conll2003_en.tar.gz'
 
     @classmethod
     def load_data(cls,
@@ -139,7 +139,7 @@ class SMP2018ECDTCorpus(object):
     """
 
     __corpus_name__ = 'SMP2018ECDTCorpus'
-    __zip_file__name = 'http://s3.bmio.net/band/SMP2018ECDTCorpus.tar.gz'
+    __zip_file__name = 'http://s3.bmio.net/kashgari/SMP2018ECDTCorpus.tar.gz'
 
     @classmethod
     def load_data(cls,
@@ -177,10 +177,10 @@ class SMP2018ECDTCorpus(object):
             except ModuleNotFoundError:
                 raise ModuleNotFoundError(
                     "please install jieba, `$ pip install jieba`")
-            x_data = [list(jieba.cut(item)) for item in df['query'].to_list()]
+            x_data = [list(jieba.cut(item)) for item in df['query'].tolist()]
         elif 'char':
-            x_data = [list(item) for item in df['query'].to_list()]
-        y_data = df['label'].to_list()
+            x_data = [list(item) for item in df['query'].tolist()]
+        y_data = df['label'].tolist()
 
         if shuffle:
             x_data, y_data = utils.unison_shuffled_copies(x_data, y_data)

@@ -21,7 +21,8 @@ import tensorflow as tf
 from band.layers import NonMaskingLayer
 from band.embeddings.base_embedding import Embedding
 from band.processors.base_processor import BaseProcessor
-import keras_bert
+from band.bert4keras.bert import build_bert_model
+from band.bert4keras.tokenizer import Tokenizer
 
 
 class BERTEmbedding(Embedding):
@@ -39,6 +40,8 @@ class BERTEmbedding(Embedding):
                  model_folder: str,
                  layer_nums: int = 4,
                  trainable: bool = False,
+                 albert: bool = False,
+                 with_pool: bool = False,
                  task: str = None,
                  sequence_length: Union[str, int] = 'auto',
                  processor: Optional[BaseProcessor] = None,
@@ -57,8 +60,10 @@ class BERTEmbedding(Embedding):
             from_saved_model:
         """
         self.trainable = trainable
-        # Do not need to train the whole bert model if just to use its feature output
+        # Do not need to train the whole bert4keras model if just to use its feature output
         self.training = False
+        self.albert = albert
+        self.with_pool = with_pool
         self.layer_nums = layer_nums
         if isinstance(sequence_length, tuple):
             raise ValueError('BERT embedding only accept `int` type `sequence_length`')
@@ -94,7 +99,7 @@ class BERTEmbedding(Embedding):
                 token2idx[token] = len(token2idx)
 
         self.bert_token2idx = token2idx
-        self._tokenizer = keras_bert.Tokenizer(token2idx)
+        self._tokenizer = Tokenizer(token2idx)
         self.processor.token2idx = self.bert_token2idx
         self.processor.idx2token = dict([(value, key) for key, value in token2idx.items()])
 
@@ -108,21 +113,21 @@ class BERTEmbedding(Embedding):
                 return
             config_path = os.path.join(self.model_folder, 'bert_config.json')
             check_point_path = os.path.join(self.model_folder, 'bert_model.ckpt')
-            bert_model = keras_bert.load_trained_model_from_checkpoint(config_path,
-                                                                       check_point_path,
-                                                                       seq_len=seq_len,
-                                                                       output_layer_num=self.layer_nums,
-                                                                       training=self.training,
-                                                                       trainable=self.trainable)
-
+            bert_model = build_bert_model(config_path,
+                                          check_point_path,
+                                          with_pool=self.with_pool,
+                                          albert=self.albert,
+                                          return_keras_model=True
+                                          )
             self._model = tf.keras.Model(bert_model.inputs, bert_model.output)
-            bert_seq_len = int(bert_model.output.shape[1])
+            bert_seq_len = 512
             if bert_seq_len < seq_len:
                 logging.warning(f"Sequence length limit set to {bert_seq_len} by pre-trained model")
                 self.sequence_length = bert_seq_len
             self.embedding_size = int(bert_model.output.shape[-1])
             output_features = NonMaskingLayer()(bert_model.output)
             self.embed_model = tf.keras.Model(bert_model.inputs, output_features)
+            print(self.embed_model.summary())
             logging.warning(f'seq_len: {self.sequence_length}')
 
     def analyze_corpus(self,
@@ -193,11 +198,11 @@ class BERTEmbedding(Embedding):
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
 
-    # bert_model_path = os.path.join(utils.get_project_path(), 'tests/test-data/bert')
-
+    # bert_model_path = os.path.join(utils.get_project_path(), 'tests/test-data/bert4keras')
+    seq_len = 100
     b = BERTEmbedding(task=band.CLASSIFICATION,
-                      model_folder='/Users/brikerman/.band/embedding/bert/chinese_L-12_H-768_A-12',
-                      sequence_length=12)
+                      model_folder='D:/bert/chinese_L-12_H-768_A-12',
+                      sequence_length=seq_len)
 
     from band.corpus import SMP2018ECDTCorpus
 
@@ -210,7 +215,7 @@ if __name__ == "__main__":
 
     tokens = b.process_x_dataset([['语', '言', '模', '型']])[0]
     target_index = [101, 6427, 6241, 3563, 1798, 102]
-    target_index = target_index + [0] * (12 - len(target_index))
+    target_index = target_index + [0] * (seq_len - len(target_index))
     assert list(tokens[0]) == list(target_index)
     print(tokens)
     print(r)

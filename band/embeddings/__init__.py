@@ -10,6 +10,3 @@
 from band.embeddings.bare_embedding import BareEmbedding
 from band.embeddings.bert_embedding import BERTEmbedding
 from band.embeddings.word_embedding import WordEmbedding
-from band.embeddings.numeric_feature_embedding import NumericFeaturesEmbedding
-from band.embeddings.stacked_embedding import StackedEmbedding
-from band.embeddings.gpt_2_embedding import GPT2Embedding
