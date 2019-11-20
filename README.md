@@ -89,9 +89,6 @@ filetree
 └── /util/
 ```
 
-### 开发的架构
-![](https://s2.ax1x.com/2019/11/20/Mf2YAU.md.png)
-
 ### 部署
 
 暂无
