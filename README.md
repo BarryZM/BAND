@@ -90,7 +90,8 @@ filetree
 ```
 
 ### 开发的架构
-![](https://s2.ax1x.com/2019/11/20/Mf2YAU.md.png)
+
+<div align=center><img src="https://s2.ax1x.com/2019/11/20/Mf2YAU.md.png" width="500"/></div>
 
 ### 部署
 
