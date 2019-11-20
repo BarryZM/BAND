@@ -6,3 +6,7 @@ band/tasks/labeling/__pycache__/models.cpython-37.pyc
 *.pyc
 *.iml
 *.xml
+*.pyc
+band/tasks/classification/__pycache__/__init__.cpython-37.pyc
+band/tasks/classification/__pycache__/__init__.cpython-37.pyc
+*.pyc

@@ -1,0 +1,880 @@
+{
+  "config": {
+    "hyper_parameters": {
+      "layer_conv": {
+        "filters": 32,
+        "kernel_size": 3,
+        "padding": "same",
+        "activation": "relu"
+      },
+      "layer_lstm": {
+        "units": 128,
+        "return_sequences": true
+      },
+      "layer_dropout": {
+        "rate": 0.4
+      },
+      "layer_time_distributed": {},
+      "layer_activation": {
+        "activation": "softmax"
+      }
+    }
+  },
+  "tf_model": {
+    "class_name": "Model",
+    "config": {
+      "name": "model_1",
+      "layers": [
+        {
+          "name": "input",
+          "class_name": "InputLayer",
+          "config": {
+            "batch_input_shape": [
+              null,
+              106
+            ],
+            "dtype": "float32",
+            "sparse": false,
+            "name": "input"
+          },
+          "inbound_nodes": []
+        },
+        {
+          "name": "layer_embedding",
+          "class_name": "Embedding",
+          "config": {
+            "name": "layer_embedding",
+            "trainable": true,
+            "batch_input_shape": [
+              null,
+              null
+            ],
+            "dtype": "float32",
+            "input_dim": 459,
+            "output_dim": 100,
+            "embeddings_initializer": {
+              "class_name": "RandomUniform",
+              "config": {
+                "minval": -0.05,
+                "maxval": 0.05,
+                "seed": null,
+                "dtype": "float32"
+              }
+            },
+            "embeddings_regularizer": null,
+            "activity_regularizer": null,
+            "embeddings_constraint": null,
+            "mask_zero": false,
+            "input_length": null
+          },
+          "inbound_nodes": [
+            [
+              [
+                "input",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "layer_conv",
+          "class_name": "Conv1D",
+          "config": {
+            "name": "layer_conv",
+            "trainable": true,
+            "dtype": "float32",
+            "filters": 32,
+            "kernel_size": [
+              3
+            ],
+            "strides": [
+              1
+            ],
+            "padding": "same",
+            "data_format": "channels_last",
+            "dilation_rate": [
+              1
+            ],
+            "activation": "relu",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "GlorotUniform",
+              "config": {
+                "seed": null,
+                "dtype": "float32"
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {
+                "dtype": "float32"
+              }
+            },
+            "kernel_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "bias_constraint": null
+          },
+          "inbound_nodes": [
+            [
+              [
+                "layer_embedding",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "layer_lstm",
+          "class_name": "LSTM",
+          "config": {
+            "name": "layer_lstm",
+            "trainable": true,
+            "dtype": "float32",
+            "return_sequences": true,
+            "return_state": false,
+            "go_backwards": false,
+            "stateful": false,
+            "unroll": false,
+            "time_major": false,
+            "units": 128,
+            "activation": "tanh",
+            "recurrent_activation": "hard_sigmoid",
+            "use_bias": true,
+            "kernel_initializer": {
+              "class_name": "GlorotUniform",
+              "config": {
+                "seed": null,
+                "dtype": "float32"
+              }
+            },
+            "recurrent_initializer": {
+              "class_name": "Orthogonal",
+              "config": {
+                "gain": 1.0,
+                "seed": null,
+                "dtype": "float32"
+              }
+            },
+            "bias_initializer": {
+              "class_name": "Zeros",
+              "config": {
+                "dtype": "float32"
+              }
+            },
+            "unit_forget_bias": true,
+            "kernel_regularizer": null,
+            "recurrent_regularizer": null,
+            "bias_regularizer": null,
+            "activity_regularizer": null,
+            "kernel_constraint": null,
+            "recurrent_constraint": null,
+            "bias_constraint": null,
+            "dropout": 0.0,
+            "recurrent_dropout": 0.0,
+            "implementation": 1
+          },
+          "inbound_nodes": [
+            [
+              [
+                "layer_conv",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "layer_dropout",
+          "class_name": "Dropout",
+          "config": {
+            "name": "layer_dropout",
+            "trainable": true,
+            "dtype": "float32",
+            "rate": 0.4,
+            "noise_shape": null,
+            "seed": null
+          },
+          "inbound_nodes": [
+            [
+              [
+                "layer_lstm",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "layer_time_distributed",
+          "class_name": "TimeDistributed",
+          "config": {
+            "name": "layer_time_distributed",
+            "trainable": true,
+            "dtype": "float32",
+            "layer": {
+              "class_name": "Dense",
+              "config": {
+                "name": "dense",
+                "trainable": true,
+                "dtype": "float32",
+                "units": 8,
+                "activation": "linear",
+                "use_bias": true,
+                "kernel_initializer": {
+                  "class_name": "GlorotUniform",
+                  "config": {
+                    "seed": null,
+                    "dtype": "float32"
+                  }
+                },
+                "bias_initializer": {
+                  "class_name": "Zeros",
+                  "config": {
+                    "dtype": "float32"
+                  }
+                },
+                "kernel_regularizer": null,
+                "bias_regularizer": null,
+                "activity_regularizer": null,
+                "kernel_constraint": null,
+                "bias_constraint": null
+              }
+            }
+          },
+          "inbound_nodes": [
+            [
+              [
+                "layer_dropout",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        },
+        {
+          "name": "activation",
+          "class_name": "Activation",
+          "config": {
+            "name": "activation",
+            "trainable": true,
+            "dtype": "float32",
+            "activation": "softmax"
+          },
+          "inbound_nodes": [
+            [
+              [
+                "layer_time_distributed",
+                0,
+                0,
+                {}
+              ]
+            ]
+          ]
+        }
+      ],
+      "input_layers": [
+        [
+          "input",
+          0,
+          0
+        ]
+      ],
+      "output_layers": [
+        [
+          "activation",
+          0,
+          0
+        ]
+      ]
+    },
+    "keras_version": "2.2.4-tf",
+    "backend": "tensorflow"
+  },
+  "embedding": {
+    "processor": {
+      "class_name": "LabelingProcessor",
+      "config": {
+        "label2idx": {
+          "<PAD>": 0,
+          "O": 1,
+          "I-ORG": 2,
+          "I-PER": 3,
+          "I-LOC": 4,
+          "B-LOC": 5,
+          "B-PER": 6,
+          "B-ORG": 7
+        },
+        "token2idx": {
+          "<PAD>": 0,
+          "<UNK>": 1,
+          "<BOS>": 2,
+          "<EOS>": 3,
+          "\uff0c": 4,
+          "\u7684": 5,
+          "\u3002": 6,
+          "\u56fd": 7,
+          "\u3001": 8,
+          "\u662f": 9,
+          "\u5728": 10,
+          "\u4eba": 11,
+          "\u4e00": 12,
+          "\u4e86": 13,
+          "\u4e2d": 14,
+          "\u4e3a": 15,
+          "\u4e0d": 16,
+          "\u5e74": 17,
+          "\u6709": 18,
+          "\u4f1a": 19,
+          "\u5230": 20,
+          "\u548c": 21,
+          "\u4f5c": 22,
+          "\u5927": 23,
+          "\u5bb6": 24,
+          "\u8fd9": 25,
+          "1": 26,
+          "\u4e1a": 27,
+          "\u4ee5": 28,
+          "\u65f6": 29,
+          "\u201c": 30,
+          "\u201d": 31,
+          "\u884c": 32,
+          "\u653f": 33,
+          "\u6211": 34,
+          "\u5de5": 35,
+          "\u4e0a": 36,
+          "\u8fdb": 37,
+          "\u5730": 38,
+          "\u7ecf": 39,
+          "\u51fa": 40,
+          "\u81ea": 41,
+          "\u8bf4": 42,
+          "\u6c11": 43,
+          "\u4e2a": 44,
+          "\u5bf9": 45,
+          "\u6765": 46,
+          "9": 47,
+          "0": 48,
+          "\u5b9a": 49,
+          "\u4eec": 50,
+          "\u4e8e": 51,
+          "\u591a": 52,
+          "\u603b": 53,
+          "\u540e": 54,
+          "\u540c": 55,
+          "\u53d1": 56,
+          "\u8bbe": 57,
+          "\u672f": 58,
+          "\u6210": 59,
+          "\u52a8": 60,
+          "\u6cd5": 61,
+          "\u8981": 62,
+          "\u90e8": 63,
+          "\u5bfc": 64,
+          "\u4fdd": 65,
+          "\u5206": 66,
+          "\u7f8e": 67,
+          "\u80fd": 68,
+          "\u65e5": 69,
+          "\u529b": 70,
+          "\uff08": 71,
+          "\uff09": 72,
+          "\uff1a": 73,
+          "\u5458": 74,
+          "\u7136": 75,
+          "\u8bae": 76,
+          "\u5168": 77,
+          "\u8005": 78,
+          "\u5df2": 79,
+          "\u4e3b": 80,
+          "\u90fd": 81,
+          "\u800c": 82,
+          "\u4ed6": 83,
+          "\u957f": 84,
+          "\u7b49": 85,
+          "\u65b0": 86,
+          "\u5e76": 87,
+          "\u5e02": 88,
+          "\u516c": 89,
+          "\u751f": 90,
+          "\u5b66": 91,
+          "\u8bba": 92,
+          "\u4e4b": 93,
+          "\u9762": 94,
+          "\u8fd8": 95,
+          "\u65e0": 96,
+          "\u5979": 97,
+          "\u8bb0": 98,
+          "\u5f97": 99,
+          "\u53ef": 100,
+          "\u672c": 101,
+          "\u673a": 102,
+          "\u5173": 103,
+          "\u52a0": 104,
+          "\u91d1": 105,
+          "\u51b3": 106,
+          "\u8d5b": 107,
+          "\u5929": 108,
+          "3": 109,
+          "\u4f01": 110,
+          "\u519c": 111,
+          "\u65b9": 112,
+          "\u4e5f": 113,
+          "\u53cd": 114,
+          "\u95ee": 115,
+          "\u9898": 116,
+          "\u5165": 117,
+          "\u7531": 118,
+          "\u4efb": 119,
+          "\u679c": 120,
+          "\u53c2": 121,
+          "\u5973": 122,
+          "\u573a": 123,
+          "\u4f7f": 124,
+          "\u6b63": 125,
+          "\u4eca": 126,
+          "\u4e16": 127,
+          "\u6b64": 128,
+          "2": 129,
+          "\u4e0e": 130,
+          "\u4ea7": 131,
+          "\u660e": 132,
+          "\u7cfb": 133,
+          "\u4e0b": 134,
+          "\u4e8b": 135,
+          "\u9886": 136,
+          "\u8c03": 137,
+          "\u505a": 138,
+          "\u597d": 139,
+          "\u533a": 140,
+          "\u5f00": 141,
+          "\u7279": 142,
+          "\u53bb": 143,
+          "\u95e8": 144,
+          "\u5341": 145,
+          "\u6237": 146,
+          "\u62a5": 147,
+          "\u793e": 148,
+          "\u636e": 149,
+          "\u6218": 150,
+          "\u5efa": 151,
+          "\u961f": 152,
+          "\u5c40": 153,
+          "\u5185": 154,
+          "\u6708": 155,
+          "\u7387": 156,
+          "\u754c": 157,
+          "\u5fc3": 158,
+          "5": 159,
+          "\uff0e": 160,
+          "\u8ba1": 161,
+          "\u6307": 162,
+          "\u524d": 163,
+          "\u2014": 164,
+          "\u7535": 165,
+          "\u9ad8": 166,
+          "\u521b": 167,
+          "\u5f15": 168,
+          "\u5c0f": 169,
+          "\u7406": 170,
+          "\u9669": 171,
+          "\u5c06": 172,
+          "\u80b2": 173,
+          "\u5b50": 174,
+          "\u6280": 175,
+          "\u63a8": 176,
+          "\u89c1": 177,
+          "\u73b0": 178,
+          "\u4e9b": 179,
+          "\u8868": 180,
+          "\u4e24": 181,
+          "\u5171": 182,
+          "\u589e": 183,
+          "\u53cb": 184,
+          "\u4ea4": 185,
+          "\u5c31": 186,
+          "8": 187,
+          "7": 188,
+          "\u5e9c": 189,
+          "\u5982": 190,
+          "\u63d0": 191,
+          "\u4f9b": 192,
+          "\u7eaa": 193,
+          "\u89e3": 194,
+          "\u7b2c": 195,
+          "\u53d7": 196,
+          "\u76d1": 197,
+          "\u770b": 198,
+          "\u9645": 199,
+          "\u60c5": 200,
+          "\u5df1": 201,
+          "\u7ed3": 202,
+          "\u8ba4": 203,
+          "\u8fc7": 204,
+          "4": 205,
+          "\u5c55": 206,
+          "\u515a": 207,
+          "\u8eab": 208,
+          "\u5229": 209,
+          "\u53d8": 210,
+          "\u53f8": 211,
+          "\u4e3e": 212,
+          "\u5f20": 213,
+          "\u5e38": 214,
+          "\u6559": 215,
+          "\u6bd4": 216,
+          "\u7edf": 217,
+          "\u628a": 218,
+          "\u8001": 219,
+          "\u4f46": 220,
+          "\u6700": 221,
+          "\u91cd": 222,
+          "\u5ba2": 223,
+          "\u67e5": 224,
+          "\u6587": 225,
+          "\u6d41": 226,
+          "\u53d6": 227,
+          "\u95f4": 228,
+          "\u4f55": 229,
+          "\u671f": 230,
+          "\u5170": 231,
+          "\u7403": 232,
+          "\u6784": 233,
+          "\u60f3": 234,
+          "\u56e0": 235,
+          "\u5b9e": 236,
+          "6": 237,
+          "\u6027": 238,
+          "\u9009": 239,
+          "\u624b": 240,
+          "\u53e3": 241,
+          "\u9662": 242,
+          "\u5904": 243,
+          "\u5176": 244,
+          "\u58f0": 245,
+          "\u7ec4": 246,
+          "\u4e09": 247,
+          "\u8fbe": 248,
+          "\u6b21": 249,
+          "\u91cc": 250,
+          "\u79ef": 251,
+          "\u52a1": 252,
+          "\u5236": 253,
+          "\u4f4f": 254,
+          "\u89c6": 255,
+          "\u9632": 256,
+          "\u4f17": 257,
+          "\u9053": 258,
+          "\u8776": 259,
+          "\u59d4": 260,
+          "\u5317": 261,
+          "\u7ec7": 262,
+          "\u6c5b": 263,
+          "\u6309": 264,
+          "\u73ed": 265,
+          "\u6838": 266,
+          "\u5b88": 267,
+          "\u5b89": 268,
+          "\u513f": 269,
+          "\u5e2d": 270,
+          "\u5c11": 271,
+          "\u5408": 272,
+          "\u5316": 273,
+          "\u5f55": 274,
+          "\u50cf": 275,
+          "\u7248": 276,
+          "\u8fd1": 277,
+          "\u8fdd": 278,
+          "\u4e89": 279,
+          "\u8425": 280,
+          "\u6c5f": 281,
+          "\u798f": 282,
+          "\u897f": 283,
+          "\u5fd7": 284,
+          "\u738b": 285,
+          "\u878d": 286,
+          "\u5b83": 287,
+          "\u8d27": 288,
+          "\u8ba9": 289,
+          "\u4eb2": 290,
+          "\u4e5d": 291,
+          "\u51b5": 292,
+          "\u5934": 293,
+          "\u6797": 294,
+          "\u81f3": 295,
+          "\u786e": 296,
+          "\u5e94": 297,
+          "\u6240": 298,
+          "\u6570": 299,
+          "\u82e6": 300,
+          "\u53ca": 301,
+          "\u65bd": 302,
+          "\u63a5": 303,
+          "\u8fde": 304,
+          "\u51e0": 305,
+          "\u91c7": 306,
+          "\u8bbf": 307,
+          "\u7a0e": 308,
+          "\u9879": 309,
+          "\u534f": 310,
+          "\u5177": 311,
+          "\u4f53": 312,
+          "\u521a": 313,
+          "\u5c14": 314,
+          "\u4e8c": 315,
+          "\u5e73": 316,
+          "\u8272": 317,
+          "\u7528": 318,
+          "\u4e94": 319,
+          "\u7740": 320,
+          "\u6cbb": 321,
+          "\u5f3a": 322,
+          "\u6781": 323,
+          "\u8ba8": 324,
+          "\u5ead": 325,
+          "\u670d": 326,
+          "\u76ee": 327,
+          "\u827a": 328,
+          "\u66fe": 329,
+          "\u6536": 330,
+          "\u56de": 331,
+          "\u5f0f": 332,
+          "\u4ee3": 333,
+          "\u578b": 334,
+          "\u76f4": 335,
+          "\u4f20": 336,
+          "\u57fa": 337,
+          "\u6ca1": 338,
+          "\u8054": 339,
+          "\u5411": 340,
+          "\u707e": 341,
+          "\u6837": 342,
+          "\u8774": 343,
+          "\u4eac": 344,
+          "\u62c9": 345,
+          "\u5f62": 346,
+          "\u8c61": 347,
+          "\u6743": 348,
+          "\u7ba1": 349,
+          "\u7eb3": 350,
+          "\u5404": 351,
+          "\u7a0b": 352,
+          "\u5e72": 353,
+          "\u753b": 354,
+          "a": 355,
+          "\u7167": 356,
+          "\u7f72": 357,
+          "\u8bb8": 358,
+          "\u5148": 359,
+          "\u5e7f": 360,
+          "\u522b": 361,
+          "\u8d39": 362,
+          "\u5bcc": 363,
+          "\u98ce": 364,
+          "\u5e0c": 365,
+          "\u5546": 366,
+          "\u65ad": 367,
+          "\u6269": 368,
+          "\u82f1": 369,
+          "\u6839": 370,
+          "\u89c4": 371,
+          "\u6d4e": 372,
+          "\u90a3": 373,
+          "\u4ec5": 374,
+          "\u56e2": 375,
+          "\u8c0b": 376,
+          "\u6d77": 377,
+          "\u80dc": 378,
+          "\u9999": 379,
+          "\u68ee": 380,
+          "\u4ece": 381,
+          "\u4e25": 382,
+          "\u5ea7": 383,
+          "\u89c2": 384,
+          "\u4fbf": 385,
+          "\u56fa": 386,
+          "\u949f": 387,
+          "\u53f7": 388,
+          "\u514b": 389,
+          "\u65af": 390,
+          "\u7ed9": 391,
+          "\u540d": 392,
+          "\u8bef": 393,
+          "\u8bb2": 394,
+          "\u7ea7": 395,
+          "\u975e": 396,
+          "\u8d44": 397,
+          "\u5143": 398,
+          "\u4e66": 399,
+          "\u9769": 400,
+          "\u9752": 401,
+          "\u8d1f": 402,
+          "\u8d23": 403,
+          "\uff05": 404,
+          "\u5916": 405,
+          "\u4e34": 406,
+          "\u6c42": 407,
+          "\u6c34": 408,
+          "\u6a21": 409,
+          "\u4fe1": 410,
+          "\u539f": 411,
+          "\u8bfe": 412,
+          "\u606f": 413,
+          "\u6216": 414,
+          "\u5f53": 415,
+          "\u8db3": 416,
+          "\u5219": 417,
+          "\u9020": 418,
+          "\u8bdd": 419,
+          "\u73af": 420,
+          "\u63a7": 421,
+          "\u5468": 422,
+          "\u91cf": 423,
+          "\u9760": 424,
+          "\u54c1": 425,
+          "\uff0d": 426,
+          "\u53ea": 427,
+          "\u9057": 428,
+          "\u6bcd": 429,
+          "\u52bf": 430,
+          "\u901a": 431,
+          "\u5f80": 432,
+          "\u624d": 433,
+          "\u7b56": 434,
+          "\u51c6": 435,
+          "\u4e45": 436,
+          "\u7acb": 437,
+          "\u68a6": 438,
+          "\u5e84": 439,
+          "\u601d": 440,
+          "\u94f6": 441,
+          "\u6301": 442,
+          "\u8015": 443,
+          "\u5ea6": 444,
+          "\u63aa": 445,
+          "\u5a01": 446,
+          "\u53e4": 447,
+          "\u6790": 448,
+          "\u5b98": 449,
+          "\u8d22": 450,
+          "\u9884": 451,
+          "\u56fe": 452,
+          "\u8f66": 453,
+          "\u65e2": 454,
+          "\u7f57": 455,
+          "\u5987": 456,
+          "\u5815": 457,
+          "\u80ce": 458
+        },
+        "token_pad": "<PAD>",
+        "token_unk": "<UNK>",
+        "token_bos": "<BOS>",
+        "token_eos": "<EOS>",
+        "dataset_info": {
+          "RECOMMEND_LEN": 106,
+          "token_count": 459
+        },
+        "add_bos_eos": false,
+        "sequence_length": 106
+      },
+      "module": "band.processors.labeling_processor",
+      "task": "labeling"
+    },
+    "class_name": "BareEmbedding",
+    "module": "band.embeddings.bare_embedding",
+    "config": {
+      "sequence_length": 106,
+      "embedding_size": 100,
+      "task": "labeling"
+    },
+    "embed_model": {
+      "class_name": "Model",
+      "config": {
+        "name": "model",
+        "layers": [
+          {
+            "name": "input",
+            "class_name": "InputLayer",
+            "config": {
+              "batch_input_shape": [
+                null,
+                106
+              ],
+              "dtype": "float32",
+              "sparse": false,
+              "name": "input"
+            },
+            "inbound_nodes": []
+          },
+          {
+            "name": "layer_embedding",
+            "class_name": "Embedding",
+            "config": {
+              "name": "layer_embedding",
+              "trainable": true,
+              "batch_input_shape": [
+                null,
+                null
+              ],
+              "dtype": "float32",
+              "input_dim": 459,
+              "output_dim": 100,
+              "embeddings_initializer": {
+                "class_name": "RandomUniform",
+                "config": {
+                  "minval": -0.05,
+                  "maxval": 0.05,
+                  "seed": null,
+                  "dtype": "float32"
+                }
+              },
+              "embeddings_regularizer": null,
+              "activity_regularizer": null,
+              "embeddings_constraint": null,
+              "mask_zero": false,
+              "input_length": null
+            },
+            "inbound_nodes": [
+              [
+                [
+                  "input",
+                  0,
+                  0,
+                  {}
+                ]
+              ]
+            ]
+          }
+        ],
+        "input_layers": [
+          [
+            "input",
+            0,
+            0
+          ]
+        ],
+        "output_layers": [
+          [
+            "layer_embedding",
+            0,
+            0
+          ]
+        ]
+      },
+      "keras_version": "2.2.4-tf",
+      "backend": "tensorflow"
+    }
+  },
+  "class_name": "CNN_LSTM_Model",
+  "module": "band.tasks.labeling.models",
+  "tf_version": "1.14.0",
+  "band_version": "0.2.4"
+}

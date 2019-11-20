@@ -20,6 +20,7 @@ from band.tasks.classification.models import AVRNN_Model
 from band.tasks.classification.models import Dropout_BiGRU_Model
 from band.tasks.classification.models import Dropout_AVRNN_Model
 from band.tasks.classification.dpcnn_model import DPCNN_Model
+from band.tasks.classification.models import Dense_Model
 
 
 BLSTMModel = BiLSTM_Model
@@ -34,4 +35,5 @@ AVRNNModel = AVRNN_Model
 DropoutBGRUModel = Dropout_BiGRU_Model
 DropoutAVRNNModel = Dropout_AVRNN_Model
 
+DenseModel = Dense_Model
 DPCNN = DPCNN_Model

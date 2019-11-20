@@ -119,6 +119,7 @@ class BERTEmbedding(Embedding):
                                           albert=self.albert,
                                           return_keras_model=True
                                           )
+
             self._model = tf.keras.Model(bert_model.inputs, bert_model.output)
             bert_seq_len = 512
             if bert_seq_len < seq_len:
@@ -127,7 +128,6 @@ class BERTEmbedding(Embedding):
             self.embedding_size = int(bert_model.output.shape[-1])
             output_features = NonMaskingLayer()(bert_model.output)
             self.embed_model = tf.keras.Model(bert_model.inputs, output_features)
-            print(self.embed_model.summary())
             logging.warning(f'seq_len: {self.sequence_length}')
 
     def analyze_corpus(self,
@@ -193,6 +193,10 @@ class BERTEmbedding(Embedding):
         if x1 is None:
             x1 = np.zeros(x0.shape, dtype=np.int32)
         return x0, x1
+
+    @property
+    def model(self):
+        return self._model
 
 
 if __name__ == "__main__":

@@ -13,6 +13,26 @@ from typing import Dict, Any
 from band.layers import L, AttentionWeightedAverageLayer, KMaxPoolingLayer
 from band.tasks.classification.base_model import BaseClassificationModel
 
+class Dense_Model(BaseClassificationModel):
+
+    @classmethod
+    def get_default_hyper_parameters(cls) -> Dict[str, Dict[str, Any]]:
+        return {
+            'layer_dense': {
+                'activation': 'softmax'
+            }
+        }
+
+    def build_model_arc(self):
+        output_dim = len(self.processor.label2idx)
+        config = self.hyper_parameters
+        embed_model = self.embedding.embed_model
+
+        layer_dense = L.Dense(output_dim, **config['layer_dense'])
+
+        output_tensor = layer_dense(embed_model.output)
+
+        self.tf_model = tf.keras.Model(embed_model.inputs, output_tensor)
 
 class BiLSTM_Model(BaseClassificationModel):
 
