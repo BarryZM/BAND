@@ -4,3 +4,5 @@
 *.pyc
 band/tasks/labeling/__pycache__/models.cpython-37.pyc
 *.pyc
+*.iml
+*.xml
