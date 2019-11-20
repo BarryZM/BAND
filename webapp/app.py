@@ -18,7 +18,7 @@ def index():
         # Retrive review and get rating from model
         endpoint = "http://127.0.0.1:8500"
         review = request.form["review"]
-        processor = utils.load_processor(model_path='saved_model/blstm/1')
+        processor = utils.load_processor(model_path='saved_model/bilstm/1')
         x = list(review)
         tensor = processor.process_x_dataset([x])
         json_data = {"model_name": "default", "data": {"input:0": tensor.tolist()}}

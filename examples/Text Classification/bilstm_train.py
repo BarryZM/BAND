@@ -46,6 +46,6 @@ loaded_model.predict(test_x[:10])
 
 # Save model
 utils.convert_to_saved_model(model,
-                             model_path='saved_model/blstm',
+                             model_path='saved_model/bilstm',
                              version=1)
 
