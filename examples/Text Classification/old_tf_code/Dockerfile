@@ -23,7 +23,7 @@ RUN curl -O https://storage.googleapis.com/bert_models/2018_11_03/chinese_L-12_H
 RUN apt update && apt install vim -y
 # github code
 WORKDIR $work_space
-ADD ./src ./src
+ADD src ./src
 WORKDIR $work_space/src
 RUN pip install -r requirements.txt
 ADD data $bert_data
