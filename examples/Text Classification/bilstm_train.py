@@ -8,11 +8,12 @@
 @time: 2019-11-20 14:20:17
 """
 
+import band
 from band.corpus import SMP2018ECDTCorpus
 from band.tasks.classification import BiLSTM_Model
 from band.callbacks import EvalCallBack
 from band import utils
-import band
+
 
 # Dataset
 train_x, train_y = SMP2018ECDTCorpus.load_data('train')

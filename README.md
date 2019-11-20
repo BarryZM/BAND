@@ -35,19 +35,28 @@ A simple and efficient BERT model training and deployment framework，一个简�
   </p>
 
 </p>
-
+ 
 ## 目录
 
-[TOC]
-
-
+- [上手指南](#上手指南)
+  - [开发前的配置要求](#开发前的配置要求)
+  - [安装方法](#安装方法)
+- [文件目录说明](#文件目录说明)
+- [开发的架构](#开发的架构)
+- [部署](#部署)
+- [使用到的框架](#使用到的框架)
+- [贡献者](#贡献者)
+  - [如何参与开源项目](#如何参与开源项目)
+- [版本控制](#版本控制)
+- [作者](#作者)
+- [鸣谢](#鸣谢)
 
 ### 上手指南
 
-###### 开发前的配置要求
+###### **开发前的配置要求**
 
-1. xxxxx x.x.x
-2. xxxxx x.x.x
+1. Python>=3.6
+2. Tensorflow>=1.13.1
 
 ###### **安装方法**
 安装band有两种方式：
@@ -59,30 +68,62 @@ A simple and efficient BERT model training and deployment framework，一个简�
     ```sh
     pip install git+https://www.github.com/sunyancn/band.git
     ```
+###### 文本分类Demo
+1. 训练模型
+    ```python
+    import band
+    from band.corpus import SMP2018ECDTCorpus
+    from band.tasks.classification import BiLSTM_Model
+    from band.callbacks import EvalCallBack
+    from band import utils
+    
+    # Dataset
+    train_x, train_y = SMP2018ECDTCorpus.load_data('train')
+    valid_x, valid_y = SMP2018ECDTCorpus.load_data('valid')
+    test_x, test_y = SMP2018ECDTCorpus.load_data('test')
+    
+    model = BiLSTM_Model()
+    eval_callback = EvalCallBack(kash_model=model,
+                                 valid_x=valid_x,
+                                 valid_y=valid_y,
+                                 step=5)
+    model.fit(train_x,
+              train_y,
+              valid_x,
+              valid_y,
+              batch_size=32,
+              callbacks=[eval_callback])
+    model.evaluate(test_x, test_y)
+    
+    # Save model to `saved_classification_model` dir
+    model.save('saved_classification_model')
+    
+    # Load model
+    loaded_model = band.utils.load_model('saved_classification_model')
+    
+    # Use model to predict
+    loaded_model.predict(test_x[:10])
+    
+    # Save model
+    utils.convert_to_saved_model(model,
+                                 model_path='saved_model/bilstm',
+                                 version=1)
+    ```
 
-### 文件目录说明
-```
-filetree 
-├── ARCHITECTURE.md
-├── LICENSE.txt
-├── README.md
-├── /account/
-├── /bbs/
-├── /docs/
-│  ├── /rules/
-│  │  ├── backend.txt
-│  │  └── frontend.txt
-├── manage.py
-├── /oa/
-├── /static/
-├── /templates/
-├── useless.md
-└── /util/
-```
+2. 部署模型
+    ```bash
+    simple_tensorflow_serving --model_base_path="./blstm"
+    ```
 
+3. 启动WebAPP,参考[代码](https://github.com/SunYanCN/BAND/tree/master/webapp)
+    ```
+    python app.py
+    ```
+   
 ### 开发的架构
 
 <div align=center><img src="https://s2.ax1x.com/2019/11/20/Mf2YAU.md.png" width="500"/></div>
+
 ### 部署
 
 暂无
