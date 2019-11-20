@@ -54,6 +54,11 @@ class ChineseDailyNerCorpus(object):
     __corpus_name__ = 'china-people-daily-ner-corpus'
     __zip_file__name = 'http://s3.bmio.net/kashgari/china-people-daily-ner-corpus.tar.gz'
 
+    def __init__(self):
+        self.train_x, self.train_y = self.load_data('train')
+        self.valid_x, self.valid_y = self.load_data('valid')
+        self.test_x, self.test_y = self.load_data('test')
+
     @classmethod
     def load_data(cls,
                   subset_name: str = 'train',
@@ -98,6 +103,11 @@ class CONLL2003ENCorpus(object):
     __corpus_name__ = 'conll2003_en'
     __zip_file__name = 'http://s3.bmio.net/kashgari/conll2003_en.tar.gz'
 
+    def __init__(self):
+        self.train_x, self.train_y = self.load_data('train')
+        self.valid_x, self.valid_y = self.load_data('valid')
+        self.test_x, self.test_y = self.load_data('test')
+
     @classmethod
     def load_data(cls,
                   subset_name: str = 'train',
@@ -140,6 +150,11 @@ class SMP2018ECDTCorpus(object):
 
     __corpus_name__ = 'SMP2018ECDTCorpus'
     __zip_file__name = 'http://s3.bmio.net/kashgari/SMP2018ECDTCorpus.tar.gz'
+
+    def __init__(self):
+        self.train_x, self.train_y = self.load_data('train')
+        self.valid_x, self.valid_y = self.load_data('valid')
+        self.test_x, self.test_y = self.load_data('test')
 
     @classmethod
     def load_data(cls,
@@ -188,7 +203,6 @@ class SMP2018ECDTCorpus(object):
                       f"x[0]: {x_data[0]}\n"
                       f"y[0]: {y_data[0]}")
         return x_data, y_data
-
 
 if __name__ == "__main__":
     a, b = CONLL2003ENCorpus.load_data()

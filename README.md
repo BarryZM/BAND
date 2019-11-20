@@ -55,8 +55,9 @@ A simple and efficient BERT model training and deployment framework，一个简�
 
 ###### **开发前的配置要求**
 
-1. Python>=3.6
-2. Tensorflow>=1.13.1
+1. Linux (Centos,Ubuntu.....)
+2. Python>=3.6
+3. Tensorflow>=1.13.1
 
 ###### **安装方法**
 安装band有两种方式：
@@ -78,22 +79,21 @@ A simple and efficient BERT model training and deployment framework，一个简�
     from band import utils
     
     # Dataset
-    train_x, train_y = SMP2018ECDTCorpus.load_data('train')
-    valid_x, valid_y = SMP2018ECDTCorpus.load_data('valid')
-    test_x, test_y = SMP2018ECDTCorpus.load_data('test')
+    dataset = SMP2018ECDTCorpus()
     
     model = BiLSTM_Model()
     eval_callback = EvalCallBack(kash_model=model,
-                                 valid_x=valid_x,
-                                 valid_y=valid_y,
+                                 valid_x=dataset.valid_x,
+                                 valid_y=dataset.valid_y,
                                  step=5)
-    model.fit(train_x,
-              train_y,
-              valid_x,
-              valid_y,
+    model.fit(dataset.train_x,
+              dataset.train_y,
+              dataset.valid_x,
+              dataset.valid_y,
               batch_size=32,
               callbacks=[eval_callback])
-    model.evaluate(test_x, test_y)
+    
+    model.evaluate(dataset.test_x, dataset.test_y)
     
     # Save model to `saved_classification_model` dir
     model.save('saved_classification_model')
@@ -102,17 +102,17 @@ A simple and efficient BERT model training and deployment framework，一个简�
     loaded_model = band.utils.load_model('saved_classification_model')
     
     # Use model to predict
-    loaded_model.predict(test_x[:10])
+    loaded_model.predict(dataset.test_x[:10])
     
     # Save model
     utils.convert_to_saved_model(model,
                                  model_path='saved_model/bilstm',
-                                 version=1)
+                                 version='1')
     ```
 
 2. 部署模型
     ```bash
-    simple_tensorflow_serving --model_base_path="./blstm"
+    simple_tensorflow_serving --model_base_path="saved_model/bilstm"
     ```
 
 3. 启动WebAPP,参考[代码](https://github.com/SunYanCN/BAND/tree/master/webapp)
