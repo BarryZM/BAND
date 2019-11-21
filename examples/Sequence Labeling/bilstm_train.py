@@ -10,14 +10,16 @@
 
 import band
 from band.corpus import ChineseDailyNerCorpus
-from band.tasks.classification import BiLSTM_Model
+from band.tasks.labeling import BiLSTM_Model
+from band.embeddings import BareEmbedding
 from band.callbacks import EvalCallBack
 from band import utils
 
 # Dataset
 dataset = ChineseDailyNerCorpus()
 
-model = BiLSTM_Model()
+bare_embedding = BareEmbedding(task=band.LABELING,sequence_length=50)
+model = BiLSTM_Model(bare_embedding)
 eval_callback = EvalCallBack(kash_model=model,
                              valid_x=dataset.valid_x,
                              valid_y=dataset.valid_y,
@@ -32,7 +34,7 @@ model.fit(dataset.train_x,
 model.evaluate(dataset.test_x, dataset.test_y)
 
 # Save model to `saved_ner_model` dir
-model.save('saved_classification_model')
+model.save('saved_ner_model')
 
 # Load model
 loaded_model = band.utils.load_model('saved_ner_model')

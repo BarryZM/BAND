@@ -20,14 +20,22 @@
     </head>
     <body>
         <div class="body">
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <div class="mdc-card">
-                <form action="" method="post">
+                <form action="/classification" method="post">
                     <div class="mdc-card-title"><h2>Text Classifier</h2></div>
                     <div class="mdc-card-content">
                         {# Review Field #}
                         <div class="mdc-text-field mdc-text-field--outlined myTextField">
                             <input class="mdc-text-field__input" name="review" type="text" maxlength="256" required>
-                            <label for="review" class="mdc-floating-label">Review</label>
+                            <label for="review" class="mdc-floating-label">Text</label>
                             <div class="mdc-notched-outline">
                                 <svg>
                                     <path class="mdc-notched-outline__path"/>
@@ -45,15 +53,55 @@
                     {# Result is Inserted Here #}
                     <div class="mdc-card-content-1">
                         {% if result %}
-                        <h4>{{ result[0] }}</h4>
+                        <p> <strong> {{ result[0] }}</strong></p>
                         <p>{{ result[1] }}</p>
                         <p>{{ result[2] }}</p>
                         {% else %}
-                        <p>Type a review to get Result</p>
+                        <p>Type a text to get Result</p>
                         {% endif %}
                     </div>
                 </form>
             </div>
+
+            <br />
+            <br />
+            <div class="mdc-card">
+                <form action="/ner" method="post">
+                    <div class="mdc-card-title"><h2>Named Entity Recognition</h2></div>
+                    <div class="mdc-card-content">
+                        {# Review Field #}
+                        <div class="mdc-text-field mdc-text-field--outlined myTextField">
+                            <input class="mdc-text-field__input" name="review" type="text" maxlength="256" required>
+                            <label for="review" class="mdc-floating-label">Text</label>
+                            <div class="mdc-notched-outline">
+                                <svg>
+                                    <path class="mdc-notched-outline__path"/>
+                                </svg>
+                            </div>
+                            <div class="mdc-notched-outline__idle"></div>
+                        </div>
+                    </div>
+                    <div class="mdc-card__actions">
+                        <div class="mdc-card__action-icons">
+                            <button class="mdc-button mdc-button--raised mdc-theme--secondary-bg mdc-theme--on-secondary mdc-card__action mdc-card__action--icon" title="Evaulate">Evaulate</button>
+                        </div>
+                    </div>
+
+                    {# Result is Inserted Here #}
+                    <div class="mdc-card-content-1">
+                        {% if result %}
+                        <p> <strong> {{ result[3] }}</strong></p>
+                        <p>{{ result[4] }}</p>
+                        {% else %}
+                        <p>Type a text to get Result</p>
+                        {% endif %}
+                    </div>
+                </form>
+            </div>
+            <br />
+            <br />
+            <br />
+            <br />
         </div>
 
         {# MDC and MDC elemnts initialization javascripts #}
