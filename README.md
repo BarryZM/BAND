@@ -120,7 +120,7 @@ A simple and efficient BERT model training and deployment framework，一个简�
     python app.py
     ```
 4. 演示
-    <div align=center><img src="figures/webapp.gif" width="800"/></div>
+    <div align=center><img src="https://s2.ax1x.com/2019/11/21/MonlUU.gif" width="800"/></div>
    
 ### 开发的架构
 
